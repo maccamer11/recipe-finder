@@ -1,16 +1,19 @@
 import React from 'react';
 
-const Recipe = ({ title, calories, image, ingredients, time }) => {
+const Recipe = ({ title, calories, image, ingredients, totalNutrients }) => {
+
+    const convertCalorie = Math.round(calories)
+
     return (
         <div>
-            <h1>{title}</h1>
-            <img src={image} alt='food' />
-            <p>{calories}</p>
-            <ol>
+            <span><h3 className='heading'>{title}</h3></span>
+            <span><img className='rounded-circle pic' src={image} alt='food' /></span>
+            <span><p>Calories: {convertCalorie}</p></span>
+            <span><ol>
                 {ingredients.map(ingredient => (
                     <li>{ingredient.text}</li>
                 ))}
-            </ol>
+            </ol></span>
         </div>
     )
 }

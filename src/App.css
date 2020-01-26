@@ -31,11 +31,16 @@
   padding: 10px 20px;
   color:white;
 } */
-/* .recipes{
-  display:flex;
-  justify-content: space-around;
+.recipes{
+  flex-direction: row;
   flex-wrap: wrap;
-} */
+  align-content: flex-start;
+  
+} 
+
+.heading{
+  padding-top: 30px;
+}
 
 
 /* .main {
@@ -55,6 +60,7 @@
   justify-content: center;
   text-align: center;
   color: #000;
+  overflow: auto;
   
 }
 
@@ -78,6 +84,7 @@
   height: 100vh;
   padding-top: 50px;
   padding-left: 30px;
+  overflow: auto;
 } 
 
 input[type="text"] {
@@ -88,10 +95,13 @@ input[type="text"] {
   padding-bottom: 4px;
   color: #fff !important;
   letter-spacing: 2px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   margin-right: 20px;
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: bold;
+
 }
+
 
 input[type="text"] { 
     outline: none;
@@ -122,3 +132,12 @@ button:active {
 button:hover {
   background-color: #882201;
 }
+
+.pic{
+  max-width: 50%;
+  max-height: 50%;
+}
+
+/* .flex-grow {
+  flex: 1 0 auto;
+} */

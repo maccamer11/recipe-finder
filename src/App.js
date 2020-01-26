@@ -23,7 +23,7 @@ const App = () => {
   }, [query]);
 
   const getRecipes = async () => {
-    const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_API_KEY}`)
+    const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_API_KEY}&from=0&to=30`)
     //convert data to json, easy to work with
     const data = await response.json();
     setRecipes(data.hits)
@@ -52,22 +52,26 @@ const App = () => {
         <Titles />
       </div>
       <div className='App col-md-7 form-container d-flex justify-content-center'>
-        <form onSubmit={getSearch} className='search-form'>
-          <input className='search-bar' type='text' value={search} onChange={updateSearch} />
-          <button className='search-button' type='submit'>Search</button>
-        </form>
-      </div>
-      <div className='recipes col-md-7 row'>
-        {recipes.map(recipe => (
-          <Recipe
-            key={recipe.recipe.label}
-            title={recipe.recipe.label}
-            image={recipe.recipe.image}
-            calories={recipe.recipe.calories}
-            ingredients={recipe.recipe.ingredients}
-          /* time={Object.keys(recipe.recipe.totalNutrients).map((key) => totalNutrients[key])} */
-          />
-        ))}
+        <div className='row mr-auto'>
+          <form onSubmit={getSearch} className='search-form'>
+            <input className='search-bar' type='text' value={search} onChange={updateSearch} />
+            <button className='search-button' type='submit'>Search</button>
+          </form>
+        </div>
+        <div className='recipes row flex-wrap'>
+          <div className=' .customized'>
+            {recipes.map(recipe => (
+              <Recipe
+                key={recipe.recipe.label}
+                title={recipe.recipe.label}
+                image={recipe.recipe.image}
+                calories={recipe.recipe.calories}
+                ingredients={recipe.recipe.ingredients}
+              /* totalNutrients={recipe.recipe.totalNutrients} */
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
 
