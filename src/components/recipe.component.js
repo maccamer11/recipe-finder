@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Recipe = ({ title, calories, image, ingredients, totalNutrients }) => {
+
+const Recipe = ({ title, calories, image, ingredients, digest }) => {
 
     const convertCalorie = Math.round(calories)
 

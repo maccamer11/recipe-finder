@@ -47,19 +47,20 @@ const App = () => {
 
 
   return (
+
     <div className='row'>
       <div className='col-md-5 title-container'>
         <Titles />
       </div>
       <div className='App col-md-7 form-container d-flex justify-content-center'>
-        <div className='row mr-auto'>
+        <div className='row d-flex align-items-stretch'>
           <form onSubmit={getSearch} className='search-form'>
             <input className='search-bar' type='text' value={search} onChange={updateSearch} />
             <button className='search-button' type='submit'>Search</button>
           </form>
         </div>
-        <div className='recipes row flex-wrap'>
-          <div className=' .customized'>
+        <div className='recipes row .flex-md-fill flex-grow-1'>
+          <div className='.customized'>
             {recipes.map(recipe => (
               <Recipe
                 key={recipe.recipe.label}
@@ -67,13 +68,14 @@ const App = () => {
                 image={recipe.recipe.image}
                 calories={recipe.recipe.calories}
                 ingredients={recipe.recipe.ingredients}
-              /* totalNutrients={recipe.recipe.totalNutrients} */
+              /* digest={recipe.recipe.digest[2]} */
               />
             ))}
           </div>
         </div>
       </div>
     </div>
+
 
   );
 }
