@@ -1,23 +1,55 @@
-import React from "react";
-export default class Modal extends React.Component {
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import Recipe from './recipe.component';
 
-    state = {
-        show: false
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+export default function FoodModal() {
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
     };
-    showModal = e => {
-        this.setState({
-            show: true
-        });
+
+    const handleClose = () => {
+        setOpen(false);
     };
-    render() {
-        if (!this.props.show) {
-            return null;
-        }
-        return <div>Hello Modal
-            <span><button onClick={e => {
-                this.showModal();
-            }}
-            > Show Modal </button></span>
-        </div>;
-    }
+
+    return (
+        <div>
+            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                Ingredients
+        </Button>
+            <Dialog
+                open={open}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-slide-title"
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <DialogTitle id="alert-dialog-slide-title">placeholder</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-slide-description" >
+                        some text goes here
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Disagree
+            </Button>
+                    <Button onClick={handleClose} color="primary">
+                        Agree
+            </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
 }

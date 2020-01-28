@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Recipe from './components/recipe.component';
 import Titles from './components/title.component';
+import FoodModal from './components/modal.component';
 
 
 
@@ -23,7 +24,7 @@ const App = () => {
   }, [query]);
 
   const getRecipes = async () => {
-    const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_API_KEY}&from=0&to=30`)
+    const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${process.env.REACT_APP_API_ID}&app_key=${process.env.REACT_APP_API_KEY}&from=0&to=20`)
     //convert data to json, easy to work with
     const data = await response.json();
     setRecipes(data.hits)
@@ -48,29 +49,36 @@ const App = () => {
 
   return (
 
-    <div className='row'>
-      <div className='col-md-5 title-container'>
-        <Titles />
-      </div>
-      <div className='App col-md-7 form-container d-flex justify-content-center'>
-        <div className='row d-flex align-items-stretch'>
-          <form onSubmit={getSearch} className='search-form'>
-            <input className='search-bar' type='text' value={search} onChange={updateSearch} />
-            <button className='search-button' type='submit'>Search</button>
-          </form>
+    <div className='container-fluid'>
+      <div className='row'>
+        <div className='col-md-5 title-container'>
+          <Titles />
         </div>
-        <div className='recipes row .flex-md-fill flex-grow-1'>
-          <div className='.customized'>
-            {recipes.map(recipe => (
-              <Recipe
-                key={recipe.recipe.label}
-                title={recipe.recipe.label}
-                image={recipe.recipe.image}
-                calories={recipe.recipe.calories}
-                ingredients={recipe.recipe.ingredients}
-              /* digest={recipe.recipe.digest[2]} */
-              />
-            ))}
+        <div className='col-md-7 form-container'>
+          <div className='row justify-content-center'>
+            <div className='search-form'>
+              <form onSubmit={getSearch}>
+                <input className='search-bar' type='text' value={search} onChange={updateSearch} />
+                <button className='search-button' type='submit'>Search</button>
+              </form>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='recipes'>
+              {recipes.map(recipe => (
+                <Recipe
+                  key={recipe.recipe.label}
+                  title={recipe.recipe.label}
+                  img={recipe.recipe.image}
+                  calories={recipe.recipe.calories}
+                  ingredients={recipe.recipe.ingredients}
+                  serving={recipe.recipe.yield}
+                  digests={recipe.recipe.digest}
+                ><div><FoodModal /></div>
+                </Recipe>
+              ))}
+            </div>
           </div>
         </div>
       </div>
